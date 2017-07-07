@@ -17,8 +17,8 @@ public class ExternalClusterSystem {
     public static void main(String[] args) {
 
         URL resource = ExternalClusterSystem.class.getClassLoader().getResource("applicationClusterClient.conf");
-        File f = new File(resource.getPath());
-        Config systemConfig = ConfigFactory.parseFile(f);
+        File configFile = new File(resource.getPath());
+        Config systemConfig = ConfigFactory.parseFile(configFile);
 
         ConfigValue value = systemConfig.getValue("systemName");
 
@@ -27,7 +27,9 @@ public class ExternalClusterSystem {
         // Set<ActorPath> initialContacts =
         // new HashSet<ActorPath>(Arrays.asList(ActorPaths.fromString("akka.tcp://ClusterSystem@127.0.0.1:2551/system/receptionist")));
 
-        ClusterClientSettings settings = ClusterClientSettings.create(externalSystem);// .withInitialContacts(initialContacts);
+        ClusterClientSettings settings = ClusterClientSettings.create(externalSystem);
+        // .withInitialContacts(initialContacts);
+        // initial contacts is taken from the config file
 
         ActorRef clusterClient = externalSystem.actorOf(ClusterClient.props(settings));
 

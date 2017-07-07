@@ -13,18 +13,18 @@ import akka.actor.Props;
 /**
  * Hello world!
  */
-public class System1 {
+public class DistributedSystem1 {
 
     public static void main(String[] args) {
 
-        URL resource = System1.class.getClassLoader().getResource("application.conf");
-        File f = new File(resource.getPath());
+        URL resource = DistributedSystem1.class.getClassLoader().getResource("applicationDistributed.conf");
+        File configFile = new File(resource.getPath());
         Config config =
-            ConfigFactory.parseString(
-                "akka.remote.netty.tcp.port=2551").withFallback(
-                    ConfigFactory.parseFile(f));
+            ConfigFactory
+                .parseString("akka.remote.netty.tcp.port=2551")
+                .withFallback(ConfigFactory.parseFile(configFile));
 
-        ActorSystem system1 = ActorSystem.create("System1", config);
+        ActorSystem system1 = ActorSystem.create("DistributedCluster", config);
 
         ActorRef actorOf = system1.actorOf(Props.create(MyActor.class), "MyfirstActor");
 
