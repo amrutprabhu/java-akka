@@ -1,4 +1,4 @@
-package com.amrut.solution;
+package com.amrut.solution.cluster;
 
 import akka.actor.AbstractLoggingActor;
 import akka.cluster.Cluster;

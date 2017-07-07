@@ -1,8 +1,9 @@
-package com.amrut.solution;
+package com.amrut.solution.cluster.distributed;
 
 import java.io.File;
 import java.net.URL;
 
+import com.amrut.solution.cluster.MyActor;
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
 
